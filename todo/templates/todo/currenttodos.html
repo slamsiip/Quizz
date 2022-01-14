@@ -1,5 +1,9 @@
 {% extends 'todo/base.html' %}
 {% block content %}
-current
+<ul>
+{% for quizz in quizzs %}
+<li>{{ todo.title }}</li>
+{% endfor %}
+</ul>
 
 {% endblock %}

@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
+from .models import Quizz
 
 
 def currenttodos(request):
@@ -25,7 +26,8 @@ def logoutuser(request):
 		return redirect('home')
 
 def home(request):
-	return render(request, 'todo/home.html')	
+	quizzs = Quizz.objects.all()
+	return render(request, 'todo/home.html', {'quizzs':quizzs})	
 
 
 def signupuser(request):

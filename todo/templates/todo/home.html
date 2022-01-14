@@ -1,8 +1,21 @@
+
+
+
 {% extends 'todo/base.html' %}
 {% block content %}
+<div class="container text-center">
 Home
 <br>
 <br>
-
-c'est la vie 
+<br>
+<ul>
+{% for quizz in quizzs %}
+<li>{{ quizz.question }}</li>
+{{ quizz.op1 }}
+<br>
+{{ quizz.op2 }}
+{% endfor %}
+</ul>
 {% endblock %}
+
+</div>
