@@ -8,6 +8,7 @@ class Quizz(models.Model):
     op3 = models.CharField(max_length=200,null=True)
     op4 = models.CharField(max_length=200,null=True)
     ans = models.CharField(max_length=200,null=True)
+    ens = models.CharField(max_length=200,null=True)
     
     def __str__(self):
         return self.question
