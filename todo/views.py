@@ -6,9 +6,28 @@ from django.contrib.auth import login, logout, authenticate
 from .models import Quizz, Nourriture, Musique
 
 
-def currenttodos(request):
+def loginuser(request):
+	if request.method == 'GET':
+		return render(request, 'todo/loginuser.html', {'form':AuthenticationForm()})
+	else:
+		user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
+		if user is None:
+			return render(request, 'todo/loginuser.html', {'form':AuthenticationForm(), 'error':'Username and password did not match'})
+		else: 
+			login(request, user)
+			return redirect('home')
+
+def logoutuser(request):
+	if request.method == 'POST':
+		logout(request)
+		return redirect('home')
+
+def home(request):
+	quizzs = Quizz.objects.all()
+	return render(request, 'todo/home.html', {'quizzs':quizzs})	
+
+def animals(request):
     if request.method == 'POST':
-        print(request.POST)
         quizzs=Quizz.objects.all()
         score=0
         wrong=0
@@ -33,37 +52,11 @@ def currenttodos(request):
             'percent':percent,
             'total':total
         }
-        return render(request, 'todo/currenttodos.html', {'quizzs':quizzs})
+        print(context)
+        return render(request, 'todo/currenttodos.html',context)
     else:
         quizzs=Quizz.objects.all()
-        context = {
-            'questions':quizzs
-        }
-        return render(request, 'todo/currenttodos.html', {'quizzs':quizzs})
-
-def loginuser(request):
-	if request.method == 'GET':
-		return render(request, 'todo/loginuser.html', {'form':AuthenticationForm()})
-	else:
-		user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-		if user is None:
-			return render(request, 'todo/loginuser.html', {'form':AuthenticationForm(), 'error':'Username and password did not match'})
-		else: 
-			login(request, user)
-			return redirect('currenttodos')
-
-def logoutuser(request):
-	if request.method == 'POST':
-		logout(request)
-		return redirect('home')
-
-def home(request):
-	quizzs = Quizz.objects.all()
-	return render(request, 'todo/home.html', {'quizzs':quizzs})	
-
-def animals(request):
-	quizzs = Quizz.objects.all()
-	return render(request, 'todo/animals.html',{'quizzs':quizzs} )	
+        return render(request, 'todo/animals.html',{'quizzs':quizzs})
 
 def musique(request):
 	quizzs = Musique.objects.all()
