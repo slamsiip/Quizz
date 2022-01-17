@@ -32,7 +32,7 @@
                     <a class="nav-link" href="{% url 'home' %}">Home</a>
                 </li>
                 <li class="nav-item {{ completed }}">
-                    <a class="nav-link" href="{% url 'home' %}">History</a>
+                    <a class="nav-link" href="{% url 'currenttodos' %}">History</a>
                 </li>
                 
 
@@ -40,7 +40,10 @@
     {% endif %}
     <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
+                <li class="nav-link">
+                    <span class="nav-link">Hello {{request.user}}</span>
+                </li>
+                <li class="nav-link">
                     <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
                     <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
                         {% csrf_token %}

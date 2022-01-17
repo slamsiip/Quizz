@@ -7,7 +7,39 @@ from .models import Quizz, Nourriture, Musique
 
 
 def currenttodos(request):
-	return render(request, 'todo/currenttodos.html')	
+    if request.method == 'POST':
+        print(request.POST)
+        quizzs=Quizz.objects.all()
+        score=0
+        wrong=0
+        correct=0
+        total=0
+        for q in quizzs:
+            total+=1
+            print(request.POST.get(q.question))
+            print(q.ans)
+            print()
+            if q.ans ==  request.POST.get(q.question):
+                score+=10
+                correct+=1
+            else:
+                wrong+=1
+        percent = score/(total*10) *100
+        context = {
+            'score':score,
+            'time': request.POST.get('timer'),
+            'correct':correct,
+            'wrong':wrong,
+            'percent':percent,
+            'total':total
+        }
+        return render(request, 'todo/currenttodos.html', {'quizzs':quizzs})
+    else:
+        quizzs=Quizz.objects.all()
+        context = {
+            'questions':quizzs
+        }
+        return render(request, 'todo/currenttodos.html', {'quizzs':quizzs})
 
 def loginuser(request):
 	if request.method == 'GET':
