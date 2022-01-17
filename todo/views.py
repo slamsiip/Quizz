@@ -31,7 +31,7 @@ def home(request):
 
 def animals(request):
 	quizzs = Quizz.objects.all()
-	return render(request, 'todo/animals.html', {'quizzs':quizzs})	
+	return render(request, 'todo/animals.html',{'quizzs':quizzs} )	
 
 def signupuser(request):
 	if request.method == 'GET':
