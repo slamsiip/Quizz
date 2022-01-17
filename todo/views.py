@@ -29,6 +29,9 @@ def home(request):
 	quizzs = Quizz.objects.all()
 	return render(request, 'todo/home.html', {'quizzs':quizzs})	
 
+def animals(request):
+	quizzs = Quizz.objects.all()
+	return render(request, 'todo/animals.html', {'quizzs':quizzs})	
 
 def signupuser(request):
 	if request.method == 'GET':
@@ -41,6 +44,6 @@ def signupuser(request):
 				login(request, user)
 				return redirect('currenttodos')
 			except IntegrityError:
-				return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already be taken, pls choose a new one '})
+				return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already be taken, please choose a new one '})
 		else : 
 			return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
