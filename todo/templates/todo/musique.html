@@ -1,0 +1,21 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<div class="container text-center">
+La musique 
+	<div class="question 1">
+		<div class="question 1">Question 1: {% for quizz in quizzs %} {{ quizz.question }}</div>
+	
+			<br> <div id="options"> <label class="options"> <input type="radio" name="radio">{{ quizz.op1 }}  <span class="checkmark"></span> </label> 
+			<br> <input type="radio" name="radio"> <label class="options"> {{ quizz.op2 }}  <span class="checkmark"></span> </label> 
+			<br> <input type="radio" name="radio"> <label class="options"> {{ quizz.op3 }}  <span class="checkmark"></span> </label> 
+			<br> <input type="radio" name="radio"> <label class="options"> {{ quizz.op4 }} <span class="checkmark"></span> </label> 
+			<br> 
+			<br> 
+			<br>  
+			{% endfor %}
+		</div>
+    </div>
+ {% endblock %}
+</div>

@@ -17,14 +17,14 @@ Une questions, quatres propositions et une seule bonne réponse. Vous pouvez vou
 Les différentes catégories des quizzs.
 <br>
 
-<button type="button" class="btn btn-outline-secondary">
+<a type="button" class="btn btn-outline-secondary" href="{% url 'musique' %}">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note" viewBox="0 0 16 16">
   <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/>
   <path fill-rule="evenodd" d="M9 3v10H8V3h1z"/>
   <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5V2.82z"/>
   </svg>
     <span class="visually-hidden">La musique</span>
-</button>
+</a>
 
 <a type="button" class="btn btn-outline-secondary" href="{% url 'animals' %}">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-piggy-bank" viewBox="0 0 16 16">
@@ -35,12 +35,12 @@ Les différentes catégories des quizzs.
 </a>
 
 
-<button type="button" class="btn btn-outline-secondary">
+<a type="button" class="btn btn-outline-secondary" href="{% url 'nourriture' %}">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
   <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.506 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
   </svg>
   <span class="visually-hidden">La nourriture</span>
-</button>
+</a>
 
 <ul>
 {% for quizz in quizzs %}

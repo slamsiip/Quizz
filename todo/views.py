@@ -33,6 +33,14 @@ def animals(request):
 	quizzs = Quizz.objects.all()
 	return render(request, 'todo/animals.html',{'quizzs':quizzs} )	
 
+def musique(request):
+	quizzs = Musique.objects.all()
+	return render(request, 'todo/musique.html',{'quizzs':quizzs} )	
+
+def nourriture(request):
+	quizzs = Nourriture.objects.all()
+	return render(request, 'todo/nourriture.html',{'quizzs':quizzs} )	
+
 def signupuser(request):
 	if request.method == 'GET':
 		return render(request, 'todo/signupuser.html', {'form':UserCreationForm()})
