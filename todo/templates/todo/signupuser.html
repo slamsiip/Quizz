@@ -1,13 +1,23 @@
 {% extends 'todo/base.html' %}
+
 {% block content %}
+<br>
+<br>
+ 
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+               <tr colspan=2>
+    {% endfor %}
 
-
-<h1> Sign Up </h1>
-<h2>{{ error }}</h2>
-<form method='POST'>
-  {% csrf_token %}
-{{ form.as_p }}
-<button type="submit">Sign up</button>
-</form>
-
+    <button type="submit">Sign up</button>
+  </form>
 {% endblock %}

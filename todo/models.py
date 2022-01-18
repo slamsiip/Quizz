@@ -1,5 +1,6 @@
 from django.db import models
- 
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Quizz(models.Model):
     question = models.CharField(max_length=200,null=True)
@@ -34,4 +35,13 @@ class Nourriture(models.Model):
     def __str__(self):
         return self.question        
 
-    
+class Score(models.Model):
+    score = models.TextField()
+    def __str__(self):
+        return self.score  
+        
+class Scored(models.Model):
+    score = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.score          

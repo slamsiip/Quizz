@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
-from .models import Quizz, Nourriture, Musique
+from .models import Quizz, Nourriture, Musique, Scored
 
 
 def loginuser(request):
@@ -29,29 +29,18 @@ def home(request):
 def animals(request):
     if request.method == 'POST':
         quizzs=Quizz.objects.all()
-        score=0
-        wrong=0
-        correct=0
-        total=0
+        scor=0
+        total = 0.5
         for q in quizzs:
-            total+=1
-            print(request.POST.get(q.question))
-            print(q.ans)
-            print()
             if q.ans ==  request.POST.get(q.question):
-                score+=10
-                correct+=1
-            else:
-                wrong+=1
-        percent = score/(total*10) *100
+                scor += 1
+        percent = int(scor/(total*10)*100)
         context = {
-            'score':score,
+            'score':scor,
             'time': request.POST.get('timer'),
-            'correct':correct,
-            'wrong':wrong,
             'percent':percent,
-            'total':total
         }
+        Scored.objects.create(user=request.user, score=scor).save()
         print(context)
         return render(request, 'todo/currenttodos.html',context)
     else:
@@ -80,3 +69,8 @@ def signupuser(request):
 				return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'That username has already be taken, please choose a new one '})
 		else : 
 			return render(request, 'todo/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match'})
+
+
+def history(request):
+	profiles = Scored.objects.filter(user=request.user)
+	return render(request, 'todo/history.html', {'profiles':profiles})
