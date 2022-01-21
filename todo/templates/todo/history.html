@@ -1,6 +1,14 @@
 {% extends 'todo/base.html' %}
+{% load static %}
 {% block content %}
-{% for profile in profiles %}
-{{ profile.score }}
-{% endfor %}
+
+
+
+<div class="container ">
+<p class="card-text">animaux: {{score_total_animaux}}</p>
+<p class="card-text">musique: {{score_total_musique}}</p>
+<p class="card-text">autre: {{score_total_autre}}</p>
+</div>
+
+
 {% endblock %}

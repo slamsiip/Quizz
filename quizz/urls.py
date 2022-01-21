@@ -25,7 +25,7 @@ urlpatterns = [
     path('login/', views.loginuser, name='loginuser'),
     # quizz
     path('', views.home, name='home'),
-    path('animals/', views.animals, name='animals'),
+    path('animaux/', views.animaux, name='animaux'),
     path('musique/', views.musique, name='musique'),
     path('nourriture/', views.nourriture, name='nourriture'),
     path('history/', views.history, name='history'),
