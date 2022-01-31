@@ -1,11 +1,37 @@
 {% extends 'todo/base.html' %}
 {% load static %}
 {% block content %}
- 
-<div class="container ">
-<p class="card-text">Percentage: {{percent}}%</p>
-<p class="card-text">Time Taken: {{time}} seconds</p>
-<p class="card-text">Theme: {{theme}}</p>
+<br>
+<br>
+<div class="container "  align='center'>
+<br>
+<br>
+<p class="card-text"><h3>Theme:</h3> {{theme}}</p>
+<p class="card-text"><h3>Percentage:</h3> {{percent}}%</p>
+<br>
+<br>
+<br>
+<br>
 </div>
+{% if percent <= 50 %}
+<div class="container "  align='center'>
+<img src="{% static 'todo/rien.jpg' %}">
+</div>
+<br>
+<br>
+<br>
+<br>
+{% else %}
+<div class="container "  align='center'>
+<img src="{% static 'todo/gg.jpg' %}">
+</div>
+<br>
+<br>
+<br>
+<br>
+
+ {% endif %}
  
+
+
 {% endblock %}  

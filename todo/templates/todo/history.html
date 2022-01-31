@@ -1,14 +1,53 @@
 {% extends 'todo/base.html' %}
-{% load static %}
 {% block content %}
+{% load static %}
+<br>
+<br>
 
+<br>
+<br>
+<br>
+<br>
 
-
-<div class="container ">
-<p class="card-text">animaux: {{score_total_animaux}}</p>
-<p class="card-text">musique: {{score_total_musique}}</p>
-<p class="card-text">autre: {{score_total_autre}}</p>
+<div class="row"  align='center'>
+<div class="col-sm">
+<img src="{% static 'todo/animaux.png' %}" width="340" height="240">
+<br>
+<br>
+<br>
+<br>
+<br>
+<p class="card-text"><h3>Animaux</h3>{{count_an}} essais <br> {{score_total_animaux}}</p>
 </div>
+<div class="col-sm">
+<img src="{% static 'todo/music.png' %}" width="340" height="240">
+<br>
+<br>
+<br>
+<br>
+<br>	
+<p class="card-text"><h3>Musique</h3>{{count_m}} essais <br> {{score_total_musique}}</p>
+</div>
+<div class="col-sm">
+<img src="{% static 'todo/autre.jpeg' %}" width="340" height="240">
+<br>
+<br>
+<br>
+<br>
+<br>	
+<p class="card-text"><h3>Autre</h3>{{count_a}} essais <br> {{score_total_autre}}</p>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<center><h3>Clique sur ton pseudo dans la navbar pour avoir ta récompense</h3><center></center>
+<br>
+<br>
 
 
 {% endblock %}
+
+<div class="row">

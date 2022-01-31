@@ -26,7 +26,6 @@ def home(request):
 	#quizzs = Quizz.objects.all()
 #	next = request.POST.get('next', '/')
 	if request.method == 'POST':	
-		print(request.POST.get("next", "eeee"))	
 		request.session['test'] = request.POST.get("next")	
 		request.session.get('test')
 		return redirect('animaux')	
@@ -38,11 +37,16 @@ def animaux(request):
         theme = var
         quizzs=Quizz.objects.all()
         scor=0
-        total = 0.5
+        total = 0 
         for q in quizzs:
-            if q.ans ==  request.POST.get(q.question):
-                scor += 1
-        percent = int(scor/(total*10)*100)
+            if q.theme == var:
+                total += 1
+                if q.ans ==  request.POST.get(q.question):
+                    scor += 1
+        if total != 0:            
+        	percent = int((scor/total)*100)
+        else :
+        	return render(request, 'todo/animaux.html',{'quizzs':quizzs, 'var':var, 'error':'Pas de question dans ce questionnaire, on en créer ?'})	
         context = {
         	'theme':theme,
             'score':scor,
@@ -50,11 +54,15 @@ def animaux(request):
             'percent':percent,
             'var' : var,
         }
-        Scored.objects.create(user=request.user, score=scor, theme = theme).save()
+        Scored.objects.create(user=request.user, score=percent, theme = theme).save()
         return render(request, 'todo/currenttodos.html',context)
     else:
         quizzs=Quizz.objects.all()
-        return render(request, 'todo/animaux.html',{'quizzs':quizzs, 'var':var})
+        total = 0 
+        for q in quizzs:
+            if q.theme == var:
+                total += 1
+        return render(request, 'todo/animaux.html',{'quizzs':quizzs,'total':total,  'var':var})
 
 def musique(request):   
     form=addQuestionform()
@@ -105,28 +113,32 @@ def history(request):
 		elif p.theme == "musique":
 			score_total_m += int(p.score)
 			count_m += 1 
+			print(p.score)
 		elif p.theme == "autres":
 			score_total_a += int(p.score)
 			count_a += 1 
 
 	if count_a != 0 : 		
-		score_total_autre = round(score_total_a/count_a, 1)
+		score_total_autre = str(round(score_total_a/count_a, 1)) + "%" 
 	else: 
 		score_total_autre = " Pas encore de score pour le quizz autre"		
 
 	if count_m != 0:
-		score_total_musique = round(score_total_m/count_m, 1)
+		score_total_musique = str(round(score_total_m/count_m, 1)) + "%"
 	else :
 		score_total_musique = " Pas encore de score pour le quizz musique"	
 
 	if count_an != 0:
-		score_total_animaux= round(score_total_an/count_an, 1)	
+		score_total_animaux= str(round(score_total_an/count_an, 1)) + "%"	
 	else: 
 		score_total_animaux= " Pas encore de score pour le quizz animaux"		
-
+		print(score_total_m, count_m)
 	context = {
         	'score_total_musique':score_total_musique,
             'score_total_animaux':score_total_animaux,
             'score_total_autre': score_total_autre,
+            'count_a':count_a,
+            'count_an':count_an,
+            'count_m':count_m,
         }
 	return render(request, 'todo/history.html', context)

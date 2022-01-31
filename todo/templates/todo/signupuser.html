@@ -3,7 +3,7 @@
 {% block content %}
 <br>
 <br>
- 
+ <center>
   <h2>Sign up</h2>
   <form method="post">
     {% csrf_token %}
@@ -16,8 +16,10 @@
         {% endfor %}
       </p>
                <tr colspan=2>
+
     {% endfor %}
 
     <button type="submit">Sign up</button>
   </form>
+                </center>
 {% endblock %}

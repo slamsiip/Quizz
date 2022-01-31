@@ -2,20 +2,25 @@
 
 {% extends 'todo/base.html' %}
 {% block content %}
-<p class="container text-center">
+<p class="container text-center",  align='center'>
 <br>
 <br>
 <br>
+{% load static %}
 
-
-<h1> Login </h1>
+<center>
+<img src="{% static 'todo/so.jpg' %}">
+<br>
+<br>
+<br>
 <h2>{{ error }}</h2>
+<br>
 <form method='POST'>
   {% csrf_token %}
 {{ form.as_p }}
 <button type="submit">Login</button>
 </form>
-
+</center>
 {% endblock %}
 
 </p>

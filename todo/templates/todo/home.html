@@ -1,53 +1,88 @@
 
 {% extends 'todo/base.html' %}
+
 {% block content %}
+
+
+
+
+
 <p class="container text-center">
 <br>
 <br>
 <br>
-Bienvenue dans ce quizz de culture générale. 
+Bienvenue dans ce quiz de culture générale. 
 <br>
-    Putain bien joué les gars 
-Une question, quatres propositionss   et une seule bonne réponse. Vous pouvez vous concerter si vous êtes à plusieurs ou bien vous concerter vous-même si vous êtes seul ! 
+Une question, quatres propositions et une seule bonne réponse. Vous pouvez vous concerter si vous êtes à plusieurs ou bien vous concerter vous-même si vous êtes seul ! 
 <br>
 1 point est attribué par bonne réponse
 
 {% if user.is_authenticated %}
 <br>
-<img src="../../static/todo/let's go.png" width="120" height="70">
+<img src="static/todo/go.png" width="120" height="70">
 <br>
-Les différentes catégories des quizzs.
 <br>
-{% for quizz in quizzs%}
-<form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="hidden" name="next" value={{ quizz }}>
-    <button type="submit">{{quizz}}</button>
-</form>
+<br>
+<br>
+<br>
+<center><h2>Passer un quiz</h2></center>
+<hr>
+<br>
+
+<div class="row">
+
+  {% for quizz in quizzs%}
+    <div class="col-sm" align='center'>
+    <form method="POST">
+      {% csrf_token %}
+      {{ form }}
+
+      <img src="{{ project.image.url }}" class="img-fluid mb-2">
+      <input type="hidden" name="next" class="btn-outline-secondary" value={{ quizz }}>
+      <button class="btn btn-outline-secondary" type="submit">{{quizz}}</button>
+  </form>
+  
+</div>
 
 {% endfor %}
-
+</div>
+<br>
+<br>
+<br>
+<br>
+<center><h2>Créer un quizz</h2></center>
+<hr>
+<br>
+<center>
 <a type="button" class="btn btn-outline-secondary" href="{% url 'musique' %}">
   <width="20" height="20" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
   <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.50s6 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
   </svg>
   <span class="visually-hidden">Créer question</span>
 </a>
+</center>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 {% else %}
+<p class="container text-center">
 <br>
 <br>
 <br>
 <br>
 <br>
+
 <a type="button" class="btn btn-outline-secondary" href="{% url 'loginuser' %}">
   <width="20" height="20" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
   <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.506 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
   </svg>
   <span class="visually-hidden">Identification</span>
 </a>
+</p>
 {% endif %}
 
-</p>
+
 {% endblock %}        

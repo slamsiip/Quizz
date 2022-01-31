@@ -3,11 +3,11 @@
 <br>
 <br>
 <br>
-
  <form method='post' action=''>
     {% csrf_token %}
     {% for q  in quizzs %}
     {% if q.theme == var %}
+
     <div class="form-group">
       <label for="question">{{q.question}}</label>
     </div>
@@ -38,30 +38,30 @@
         </div>
         <br>
          <br>
+
     </div>    
     {% endif %}
     {% endfor %}
     <input id='timer' type='hidden' name="timer" value="">
     <br>
+    {% if total == 0 %}
+    <center>
+    <h2>Pas encore de question dans ce theme, on en créer ? </h2>
+    <br>
+<br>
+<br>
+<a type="button" class="btn btn-outline-secondary" href="{% url 'musique' %}">
+  <width="20" height="20" fill="currentColor" class="bi bi-egg" viewBox="0 0 16 16">
+  <path d="M8 15a5 5 0 0 1-5-5c0-1.956.69-4.286 1.742-6.12.524-.913 1.112-1.658 1.704-2.164C7.044 1.206 7.572 1 8 1c.428 0 .956.206 1.554.716.592.50s6 1.18 1.251 1.704 2.164C12.31 5.714 13 8.044 13 10a5 5 0 0 1-5 5zm0 1a6 6 0 0 0 6-6c0-4.314-3-10-6-10S2 5.686 2 10a6 6 0 0 0 6 6z"/>
+  </svg>
+  <span class="visually-hidden">Créer question</span>
+</a>
+</center>
+    {% else %}
+
     <button type="submit" class="btn btn-primary">Submit</button>
+    {% endif %}
   </form>
 
-    {% block script %}
-        <script>
- 
-            console.log('hello world')
-            const timer=document.getElementById('displaytimer')
-            console.log(timer.textContent)
-            const inputtag = document.getElementById('timer')
- 
-            t=0
-            setInterval(()=>{
-                t+=1
-                timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
-                inputtag.value = t
-            },1000)
-        </script>
-    {% endblock script %}
- 
-</div>
+
 {% endblock %}

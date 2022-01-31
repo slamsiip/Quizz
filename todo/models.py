@@ -23,7 +23,7 @@ class Quizz(models.Model):
     op3 = models.CharField(max_length=200,null=True)
     op4 = models.CharField(max_length=200,null=True)
     ans = models.CharField(max_length=200,null=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='static/todo')
     url = models.URLField(blank=True)
  
 
